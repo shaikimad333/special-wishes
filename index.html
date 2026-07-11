@@ -23,18 +23,31 @@
 <body>
     <div id="main">
         <div id="error"><a href="http://www.google.cn/chrome/intl/zh-CN/landing_chrome.html?hl=zh-CN&brand=CHMI">Chrome</a> (<a href="http://firefox.com.cn/download/">Firefox</a>)</div>
-        <audio id="song">
-  <source src="oosanam.mp3" type="audio/mpeg">
-</audio>
-<script>
-let song = document.getElementById("song");
+        <audio id="song" loop>
+            <source src="oosanam.mp3" type="audio/mpeg">
+        </audio>
+        <script>
+            let song = document.getElementById("song");
+            let hasPlayed = false;
 
-document.addEventListener("click", function () {
-    song.currentTime = 35;
-    song.play();
-}, { once: true });
-}, 7000);
-</script>
+            // Play on first click/tap
+            document.addEventListener("click", function() {
+                if (!hasPlayed) {
+                    song.currentTime = 0;
+                    song.play();
+                    hasPlayed = true;
+                }
+            });
+
+            // Also play on touch for mobile devices
+            document.addEventListener("touchstart", function() {
+                if (!hasPlayed) {
+                    song.currentTime = 0;
+                    song.play();
+                    hasPlayed = true;
+                }
+            });
+        </script>
         <div id="wrap">
             <div id="text">
                 <div id="code">
@@ -57,7 +70,7 @@ document.addEventListener("click", function () {
     <script>
     (function() {
         var canvas = $('#canvas');
-		
+	
         if (!canvas[0].getContext) {
             $("#error").show();
             return false;
