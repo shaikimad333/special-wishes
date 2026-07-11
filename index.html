@@ -29,9 +29,10 @@
 <script>
 let song = document.getElementById("song");
 
-setTimeout(function() {
+document.addEventListener("click", function () {
     song.currentTime = 35;
     song.play();
+}, { once: true });
 }, 7000);
 </script>
         <div id="wrap">
